@@ -49,7 +49,9 @@ def init():
 #翻译乱码文件夹
 def translate_dir():
     for file in os.listdir():
-        
+        if(os.path.isDir(os.path.join(current_dir,file))):
+            print("在文件夹里面")
+            pass
     pass
 #这个不能翻译乱码文件夹
 def translate():
