@@ -56,12 +56,14 @@ def translate_dir():
     if(os.path.isdir(test_path)):
         is_dir=True
     print(is_dir)
-    if is_dir:
+    if is_dir:        
         gbk=test_path.encode("gbk")
         print("gbk编码->"+str(gbk))
         jp=gbk.decode("shift-jis")
         print("shift-jis编码->"+jp)
-        
+        new_path=os.path.join(current_dir,jp)
+        os.rename(test_path,new_path)
+        print("脚本运行完毕 快去查看解码结果吧-------")
 
     print("文件夹判断--------↑")
 #这个不能翻译乱码文件夹
