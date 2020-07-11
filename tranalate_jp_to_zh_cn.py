@@ -51,21 +51,7 @@ def init():
 
 #翻译乱码文件夹
 def translate_dir():
-    """ is_dir=False
-    test_path=os.path.join(current_dir,"幚峴僼傽僀儖乛DLL")
-    if(os.path.isdir(test_path)):
-        is_dir=True
-    print(is_dir)
-    if is_dir:        
-        gbk=test_path.encode("gbk")
-        print("gbk编码->"+str(gbk))
-        jp=gbk.decode("shift-jis")
-        print("shift-jis编码->"+jp)
-        new_path=os.path.join(current_dir,jp)
-        os.rename(test_path,new_path)
-        print("脚本运行完毕 快去查看解码结果吧-------")
-    print("文件夹判断--------↑")"""
-print("如果出现权限问题的报错 那么应该就是网吧系统的问题了")
+    print("如果出现权限问题的报错 那么应该就是网吧系统的问题了")
     #-------以下是批量翻译乱码文件夹代码--正式开始编写-------------------
     for file in os.listdir(current_dir):
         if(os.path.isdir(os.path.join(current_dir,file))):
@@ -80,7 +66,6 @@ print("如果出现权限问题的报错 那么应该就是网吧系统的问题
             print("脚本运行完毕 快去查看解码结果吧-------")
 #这个不能翻译乱码文件夹
 def translate():
-
     #这个方法不能解码文件夹
     for file in os.listdir(current_dir):
         #print("解码结果->"+str(jp))
