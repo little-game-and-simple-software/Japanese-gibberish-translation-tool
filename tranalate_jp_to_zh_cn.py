@@ -30,7 +30,7 @@ def init():
     print("当前路径->"+current_dir)
     print("欢迎使用这个日文乱码工具,目前只支持单行文本翻译模式和批量翻译(批量翻译文件目录不能有乱码文件夹,不然无法解码")
     print("遇到不会使用的问题欢迎联系作者微信13023335265")
-    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明")
+    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明 \n 4是批量文件夹翻译模式")
     usr=input()
     if(usr=="1"):
         one_trans()
@@ -51,8 +51,13 @@ def translate_dir():
     for file in os.listdir():
         if(os.path.isDir(os.path.join(current_dir,file))):
             print("在文件夹里面")
-            pass
-    pass
+            gbk=file.encode("gbk")
+            jp=gbk.decode("shift-jis")
+            #旧目录名 #新目录名 新旧完整文件路径名称
+            old_path=os.path.join(current_dir,file)
+            new_path=os.path.join(current_dir,jp)
+            print("旧路径->"+old_path)
+            print("新路径->"+new_path)
 #这个不能翻译乱码文件夹
 def translate():
 
