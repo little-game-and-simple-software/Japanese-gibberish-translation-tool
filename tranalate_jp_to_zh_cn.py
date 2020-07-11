@@ -45,19 +45,25 @@ def init():
         a=input()
         if a=="0":
             init()
+    if(usr=="4"):
+        print("进入批量乱码文件夹解码模式")
+        translate_dir()
 
 #翻译乱码文件夹
 def translate_dir():
-    for file in os.listdir():
-        if(os.path.isDir(os.path.join(current_dir,file))):
-            print("在文件夹里面")
-            gbk=file.encode("gbk")
-            jp=gbk.decode("shift-jis")
-            #旧目录名 #新目录名 新旧完整文件路径名称
-            old_path=os.path.join(current_dir,file)
-            new_path=os.path.join(current_dir,jp)
-            print("旧路径->"+old_path)
-            print("新路径->"+new_path)
+    is_dir=False
+    test_path=os.path.join(current_dir,"幚峴僼傽僀儖乛DLL")
+    if(os.path.isdir(test_path)):
+        is_dir=True
+    print(is_dir)
+    if is_dir:
+        gbk=test_path.encode("gbk")
+        print("gbk编码->"+str(gbk))
+        jp=gbk.decode("shift-jis")
+        print("shift-jis编码->"+jp)
+        
+
+    print("文件夹判断--------↑")
 #这个不能翻译乱码文件夹
 def translate():
 
