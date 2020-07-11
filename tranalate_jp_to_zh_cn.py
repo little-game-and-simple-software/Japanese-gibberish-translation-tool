@@ -48,7 +48,8 @@ def init():
 
 #翻译乱码文件夹
 def translate_dir():
-
+    for file in os.listdir():
+        
     pass
 #这个不能翻译乱码文件夹
 def translate():
