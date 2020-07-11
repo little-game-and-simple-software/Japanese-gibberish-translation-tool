@@ -45,7 +45,15 @@ def init():
         a=input()
         if a=="0":
             init()
+
+#翻译乱码文件夹
+def translate_dir():
+
+    pass
+#这个不能翻译乱码文件夹
 def translate():
+
+    #这个方法不能解码文件夹
     for file in os.listdir(current_dir):
         #print("解码结果->"+str(jp))
         if(os.path.isfile(os.path.join(current_dir,file))):
