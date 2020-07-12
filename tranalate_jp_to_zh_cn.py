@@ -30,7 +30,7 @@ def init():
     print("当前路径->"+current_dir)
     print("欢迎使用这个日文乱码工具,目前只支持单行文本翻译模式和批量翻译(批量翻译文件目录不能有乱码文件夹,不然无法解码")
     print("遇到不会使用的问题欢迎联系作者微信13023335265")
-    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明")
+    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明 \n 4是批量文件夹翻译模式")
     usr=input()
     if(usr=="1"):
         one_trans()
@@ -45,7 +45,28 @@ def init():
         a=input()
         if a=="0":
             init()
+    if(usr=="4"):
+        print("进入批量乱码文件夹解码模式")
+        translate_dir()
+
+#翻译乱码文件夹
+def translate_dir():
+    print("如果出现权限问题的报错 那么应该就是网吧系统的问题了")
+    #-------以下是批量翻译乱码文件夹代码--正式开始编写-------------------
+    for file in os.listdir(current_dir):
+        if(os.path.isdir(os.path.join(current_dir,file))):
+            #通过判断 现在的file变量应该为文件夹 不然就是我写错了
+            print("file变量的值"+str(file))
+            gbk=file.encode("gbk")
+            jp=gbk.decode("shift-jis")
+            print("解码结果"+str(jp))
+            old_path=os.path.join(current_dir,file)
+            new_path=os.path.join(current_dir,jp)
+            os.rename(old_path,new_path)
+            print("脚本运行完毕 快去查看解码结果吧-------")
+#这个不能翻译乱码文件夹
 def translate():
+    #这个方法不能解码文件夹
     for file in os.listdir(current_dir):
         #print("解码结果->"+str(jp))
         if(os.path.isfile(os.path.join(current_dir,file))):
