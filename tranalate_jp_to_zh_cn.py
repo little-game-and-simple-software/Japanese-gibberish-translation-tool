@@ -31,6 +31,7 @@ def init():
     print("欢迎使用这个日文乱码工具,目前只支持单行文本翻译模式和批量翻译(批量翻译文件目录不能有乱码文件夹,不然无法解码")
     print("遇到不会使用的问题欢迎联系作者微信13023335265")
     print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明 \n 4是批量文件夹翻译模式")
+    print("输入5进入批量翻译文件内容模式")
     usr=input()
     if(usr=="1"):
         one_trans()
@@ -48,7 +49,18 @@ def init():
     if(usr=="4"):
         print("进入批量乱码文件夹解码模式")
         translate_dir()
-
+    if usr=="5":
+        translate_contents_in_files()
+def translate_contents_in_files():
+    for file in os.listdir(current_dir):
+        current_tmp_file_path=os.path.join(current_dir,file)
+        print("当前路径->"+current_tmp_file_path)
+        if(os.path.isfile(current_tmp_file_path)):
+            current_tmp_file=open(current_tmp_file_path,"r",1024,"gbk")
+            tmp_text=current_tmp_file.read()
+            #print(tmp_text)
+            current_tmp_file.close()
+    pass
 #翻译乱码文件夹
 def translate_dir():
     print("如果出现权限问题的报错 那么应该就是网吧系统的问题了")
