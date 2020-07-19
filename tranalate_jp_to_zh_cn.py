@@ -77,12 +77,12 @@ def translate_contents_in_files():
                 pass
             else:
                 print("-------------排除自身脚本后的代码--------------")
-                current_tmp_file=open(current_tmp_file_path,"r",1024,"utf-8")
+                current_tmp_file=open(current_tmp_file_path,"rb",1024)
                 tmp_text=current_tmp_file.read()
-                #print("文件内容->"+tmp_text)
-                gbk=tmp_text.encode("gbk","ignore")
+                print("文件内容->"+str(tmp_text))
+                #gbk=tmp_text.encode("gbk","ignore")
                 #print("gbk->"+str(gbk))
-                jp=gbk.decode("shift-jis","ignore")
+                jp=tmp_text.decode("shift-jis","ignore")
                 print("jp->"+jp)
                 current_tmp_file.close()
                 #注意少了/会路径出错
