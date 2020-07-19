@@ -2,12 +2,12 @@ import os
 import sys
 current_path=__file__
 #当前路径
-current_dir=""
+current_dir=os.path.dirname(__file__)
 to_trans_file_name_list=[]
 #要处理的文件列表
 files=[]
 #只翻译一次
-luan_ma="幚峴僼傽僀儖乛DLL"
+luan_ma="幚峴僼傽僀儖"
 def one_trans():
     while(True):
         print("欢迎使用,输入0退出循环")
@@ -30,7 +30,9 @@ def init():
     print("当前路径->"+current_dir)
     print("欢迎使用这个日文乱码工具,目前只支持单行文本翻译模式和批量翻译(批量翻译文件目录不能有乱码文件夹,不然无法解码")
     print("遇到不会使用的问题欢迎联系作者微信13023335265")
-    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件翻译模式 \n 3是一些说明 \n 4是批量文件夹翻译模式")
+    print("请输入模式,\n 0为退出程序\n 1为单行日文文本乱码翻译模式,\n 2为批量文件名乱码翻译模式 \n 3是一些说明 \n 4是批量文件夹翻译模式")
+    print("5是批量翻译文件内容模式")
+    print("6是使用帮助")
     usr=input()
     if(usr=="1"):
         one_trans()
@@ -48,7 +50,49 @@ def init():
     if(usr=="4"):
         print("进入批量乱码文件夹解码模式")
         translate_dir()
-
+    if usr=="5":
+        if(not os.path.exists(os.path.join(current_dir,"jp"))):
+            os.mkdir(os.path.join(current_dir,"jp"))
+        translate_contents_in_files()
+    if usr=="6":
+        while True:
+            os.system("cls")
+            print("输入0退出")
+            print("帮助 我把每个功能分开写了")
+            print("注意如果本身是utf-8的文件,不需要转换,只能转换非utf-8编码文件的内容 不然会报错")
+            a=input()
+            if a=="0":
+                break
+        init()
+#翻译乱码的文件内容
+def translate_contents_in_files():
+    for file in os.listdir(current_dir):
+        #print(file)
+        current_tmp_file_path=os.path.join(current_dir,file)
+        print("当前路径->"+current_tmp_file_path)
+        if(os.path.isfile(current_tmp_file_path)):
+            #排除自身脚本文件
+            if(current_tmp_file_path.endswith("jp_to_zh_cn.py")):
+                print("---------")
+                pass
+            else:
+                print("-------------排除自身脚本后的代码--------------")
+                current_tmp_file=open(current_tmp_file_path,"rb",1024)
+                tmp_text=current_tmp_file.read()
+                print("文件内容->"+str(tmp_text))
+                #gbk=tmp_text.encode("gbk","ignore")
+                #print("gbk->"+str(gbk))
+                jp=tmp_text.decode("shift-jis","ignore")
+                print("jp->"+jp)
+                current_tmp_file.close()
+                #注意少了/会路径出错
+                new_path=os.path.join(current_dir+"/","jp/",file)
+                print("新路径"+new_path)
+                new_file=open(new_path,"w+")
+                new_file.write(jp)
+                new_file.close()
+                
+    pass
 #翻译乱码文件夹
 def translate_dir():
     print("如果出现权限问题的报错 那么应该就是网吧系统的问题了")
